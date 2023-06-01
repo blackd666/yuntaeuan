@@ -38,8 +38,8 @@ def main(args=None):
             else if:
                 speed=speed+10
             print(speed)
-delay(2)
-else:  angle=angle-10
+            delay(2)
+            else:  angle=angle-10
             print(angle)
 
         if key =="s":
