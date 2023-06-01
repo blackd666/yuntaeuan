@@ -30,7 +30,7 @@ def main(args=None):
     
     while(1):
         key = getKey()
-         if key =="1":
+        if key =="1":
             print(key)
             # speed=speed+1
             if speed ==360:
