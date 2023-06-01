@@ -35,7 +35,7 @@ def main(args=None):
             # speed=speed+1
             if speed ==360:
                 speed=360
-            elif:
+            elif: speed < 360
                 speed=speed+10
             print(speed)
             delay(2)
