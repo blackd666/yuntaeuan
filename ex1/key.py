@@ -49,35 +49,8 @@ def main(args=None):
         twist.angular.z = 0  # 각속도를 0으로 설정하여 회전 중지
         twist.linear.x = speed
         pub.publish(twist)
-
-        if key =="s":
-            print(key)
-            if speed ==-360:
-                speed=360
-            else:
-                speed=speed-10
-            print(speed)
-
-        if key=="a":
-            print(key)
-            speed=0
-            angle=angle-10
-            print(angle)
-
-        if key=="d":
-            print(key)
-            speed=0
-            angle=angle+10
-            print(angle)
-
-        if key=="q":
-            print(key)
-            angle=0.0
-            speed=0.0
-            print(speed)
-            print(angle)
-            break
-        print(1)
+        
+      print(1)
        
 
 
