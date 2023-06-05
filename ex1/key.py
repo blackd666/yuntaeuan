@@ -50,7 +50,7 @@ def main(args=None):
             time.sleep(3)  # 회전 시간 설정
 
             # 다시 속도가 10인 상태로 전진
-            twist.angular.z = 0  # 각속도를 0으로 설정하여 회전 중지
+            twist.angular.z = 0.0  # 각속도를 0으로 설정하여 회전 중지
             twist.linear.x = speed
             pub.publish(twist)
           
