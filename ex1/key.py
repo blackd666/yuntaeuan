@@ -30,17 +30,25 @@ def main(args=None):
     
     while(1):
         key = getKey()
-    if key == "1":
-        print(key)
-        if speed == 360:
-            speed = 360
-        elif speed < 360:
-            speed = speed + 10
-        print(speed)
-        delay(2)
-    else:
-        angle = angle - 10
-        print(angle)
+    if key == "w":
+    print(key)
+    speed += 10
+    print(speed)
+   
+    twist = Twist()
+    twist.linear.x = speed
+    pub.publish(twist)
+    time.sleep(3)
+
+    angle = 90  # 회전 각도 설정
+    twist.angular.z = angle
+    pub.publish(twist)
+    time.sleep(3)  # 회전 시간 설정
+
+    # 다시 속도가 10인 상태로 전진
+    twist.angular.z = 0  # 각속도를 0으로 설정하여 회전 중지
+    twist.linear.x = speed
+    pub.publish(twist)
 
         if key =="s":
             print(key)
