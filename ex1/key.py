@@ -37,6 +37,7 @@ def main(args=None):
 
     # 전진 속도를 유지하는 동안 3초간 대기
             twist = Twist()
+            speed = float(speed)
             twist.linear.x = speed
             pub.publish(twist)
             time.sleep(3)
@@ -96,5 +97,5 @@ def main(args=None):
 
 
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
-
+       
 main()
