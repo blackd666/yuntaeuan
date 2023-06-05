@@ -30,31 +30,63 @@ def main(args=None):
     
     while(1):
         key = getKey()
-    if key == "w":
-        print(key)
-        speed += 10
-        print(speed)
-   
-        twist = Twist()
-        twist.linear.x = speed
-        pub.publish(twist)
-        time.sleep(3)
+        if key == "w":
+            print(key)
+            speed += 10  # 속도를 10 증가시킴
+            print(speed)
 
-        angle = 90  # 회전 각도 설정
-        twist.angular.z = angle
-        pub.publish(twist)
-        time.sleep(3)  # 회전 시간 설정
+    # 전진 속도를 유지하는 동안 3초간 대기
+            twist = Twist()
+            twist.linear.x = speed
+            pub.publish(twist)
+            time.sleep(3)
+
+    # 90도 오른쪽으로 회전하는 동작 추가
+            angle = 90  # 회전 각도 설정
+            twist.angular.z = angle
+            pub.publish(twist)
+            time.sleep(3)  # 회전 시간 설정
 
     # 다시 속도가 10인 상태로 전진
-        twist.angular.z = 0  # 각속도를 0으로 설정하여 회전 중지
-        twist.linear.x = speed
-        pub.publish(twist)
-        
-      print(1)
+            twist.angular.z = 0  # 각속도를 0으로 설정하여 회전 중지
+            twist.linear.x = speed
+            pub.publish(twist)
        
 
+        if key =="s":
+            print(key)
+            if speed ==-360:
+                speed=360
+            else:
+                speed=speed-10
+            print(speed)
 
-       
+        if key=="a":
+            print(key)
+            speed=0
+            angle=angle-10
+            print(angle)
+
+        if key=="d":
+            print(key)
+            speed=0
+            angle=angle+10
+            print(angle)
+
+        if key=="q":
+            print(key)
+            angle=0.0
+            speed=0.0
+            print(speed)
+            print(angle)
+
+        if key =="e":
+            print(key)
+            angle=0.0
+            speed=0.0
+            break
+        print(1)
+
 
         twist = Twist()
         speed=float(speed)
@@ -66,3 +98,17 @@ def main(args=None):
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
 
 main()
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
