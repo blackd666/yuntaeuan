@@ -69,13 +69,7 @@ def main(args=None):
             print(speed)
             print(angle)
 
-        if key =="e":
-            print(key)
-            angle=0.0
-            speed=0.0
-            break
-        print(1)
-
+       
 
         twist = Twist()
         speed=float(speed)
