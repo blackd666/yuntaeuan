@@ -35,67 +35,67 @@ def main(args=None):
             import time
 
 # 시리얼 통신을 위한 포트와 속도 설정
-port = '/dev/ttyUSB0'  # 사용하는 시리얼 포트에 맞게 수정해주세요
-baudrate = 9600
+            port = '/dev/ttyUSB0'  # 사용하는 시리얼 포트에 맞게 수정해주세요
+            baudrate = 9600
 
 # 시리얼 통신 객체 생성
-serial_connection = serial.Serial(port, baudrate)
+            serial_connection = serial.Serial(port, baudrate)
 
 # 로봇 이동 함수 정의
-def move_robot(steps):
+            def move_robot(steps):
     # 로봇을 지정한 스텝 수만큼 전진시키는 명령 전송
-    serial_connection.write(f'steps,{steps}\n'.encode())
+                serial_connection.write(f'steps,{steps}\n'.encode())
 
     # 로봇이 이동을 완료할 때까지 대기
-    while True:
-        response = serial_connection.readline().decode().strip()
-        if response == 'done':
-            break
+                while True:
+                    response = serial_connection.readline().decode().strip()
+                    if response == 'done':
+                        break
 
 # 키 입력 대기 함수 정의
-def wait_for_key():
-    while True:
-        key = input("Press '1' to start the robot: ")
-        if key == '1':
-            break
+            def wait_for_key():
+                while True:
+                    key = input("Press '1' to start the robot: ")
+                    if key == '1':
+                        break
 
 # 로봇 작동 함수 정의
-def run_robot():
+            def run_robot():
     # 로봇 작동 시작 메시지 출력
-    print("Robot is starting...")
+                print("Robot is starting...")
 
     # 로봇 작동 순서대로 실행
-    move_robot(3)
-    print("Robot has moved 3 steps.")
-    time.sleep(1)
-    serial_connection.write(b'turn,right\n')
-    print("Robot is turning right...")
-    time.sleep(1)
-    move_robot(2)
-    print("Robot has moved 2 steps.")
+                move_robot(3)
+                print("Robot has moved 3 steps.")
+                time.sleep(1)
+                serial_connection.write(b'turn,right\n')
+                print("Robot is turning right...")
+                time.sleep(1)
+                move_robot(2)
+                print("Robot has moved 2 steps.")
 
     # 로봇 작동 완료 메시지 출력
-    print("Robot has finished.")
+                print("Robot has finished.")
 
 # 프로그램 실행 함수 정의
-def main():
+            def main():
     # 시리얼 통신 연결 확인
-    if not serial_connection.is_open:
-        print(f"Failed to connect to serial port {port}")
-        return
+                if not serial_connection.is_open:
+                    print(f"Failed to connect to serial port {port}")
+                    return
 
     # 키 입력 대기
-    wait_for_key()
+                wait_for_key()
 
     # 로봇 작동
-    run_robot()
+                run_robot()
 
     # 프로그램 종료 시 시리얼 포트 연결 닫기
-    serial_connection.close()
+                serial_connection.close()
 
 # 메인 함수 실행
-if __name__ == "__main__":
-    main()
+            if __name__ == "__main__":
+ main()
        
 
         if key =="s":
