@@ -39,7 +39,7 @@ def main(args=None):
                 speed=speed+10
             print(speed)
             delay(2)
-            else: speed < 360:
+            else:
                 angle=angle-10
             print(angle)
 
