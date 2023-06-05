@@ -31,28 +31,71 @@ def main(args=None):
     while(1):
         key = getKey()
         if key == "w":
-            print(key)
-            speed += 10  # 속도를 10 증가시킴
-            print(speed)
+            import serial
+            import time
 
-    # 전진 속도를 유지하는 동안 3초간 대기
-            twist = Twist()
-            speed = float(speed)
-            twist.linear.x = speed
-            pub.publish(twist)
-            time.sleep(3)
+# 시리얼 통신을 위한 포트와 속도 설정
+port = '/dev/ttyUSB0'  # 사용하는 시리얼 포트에 맞게 수정해주세요
+baudrate = 9600
 
-    # 90도 오른쪽으로 회전하는 동작 추가
-            angle = 90
-            angle = float(angle)
-            twist.angular.z = angle
-            pub.publish(twist)
-            time.sleep(3)  # 회전 시간 설정
+# 시리얼 통신 객체 생성
+serial_connection = serial.Serial(port, baudrate)
 
-    # 다시 속도가 10인 상태로 전진
-            twist.angular.z = 0.0  # 각속도를 0으로 설정하여 회전 중지
-            twist.linear.x = speed
-            pub.publish(twist)
+# 로봇 이동 함수 정의
+def move_robot(steps):
+    # 로봇을 지정한 스텝 수만큼 전진시키는 명령 전송
+    serial_connection.write(f'steps,{steps}\n'.encode())
+
+    # 로봇이 이동을 완료할 때까지 대기
+    while True:
+        response = serial_connection.readline().decode().strip()
+        if response == 'done':
+            break
+
+# 키 입력 대기 함수 정의
+def wait_for_key():
+    while True:
+        key = input("Press '1' to start the robot: ")
+        if key == '1':
+            break
+
+# 로봇 작동 함수 정의
+def run_robot():
+    # 로봇 작동 시작 메시지 출력
+    print("Robot is starting...")
+
+    # 로봇 작동 순서대로 실행
+    move_robot(3)
+    print("Robot has moved 3 steps.")
+    time.sleep(1)
+    serial_connection.write(b'turn,right\n')
+    print("Robot is turning right...")
+    time.sleep(1)
+    move_robot(2)
+    print("Robot has moved 2 steps.")
+
+    # 로봇 작동 완료 메시지 출력
+    print("Robot has finished.")
+
+# 프로그램 실행 함수 정의
+def main():
+    # 시리얼 통신 연결 확인
+    if not serial_connection.is_open:
+        print(f"Failed to connect to serial port {port}")
+        return
+
+    # 키 입력 대기
+    wait_for_key()
+
+    # 로봇 작동
+    run_robot()
+
+    # 프로그램 종료 시 시리얼 포트 연결 닫기
+    serial_connection.close()
+
+# 메인 함수 실행
+if __name__ == "__main__":
+    main()
        
 
         if key =="s":
