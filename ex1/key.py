@@ -30,18 +30,17 @@ def main(args=None):
     
     while(1):
         key = getKey()
-        if key =="1":
-            print(key)
-            # speed=speed+1
-            if speed ==360:
-                speed=360
-            elif speed < 360:
-                speed=speed+10
-            print(speed)
-            delay(2)
-            else:
-                angle=angle-10
-            print(angle)
+    if key == "1":
+        print(key)
+        if speed == 360:
+            speed = 360
+        elif speed < 360:
+            speed = speed + 10
+        print(speed)
+        delay(2)
+    else:
+        angle = angle - 10
+        print(angle)
 
         if key =="s":
             print(key)
